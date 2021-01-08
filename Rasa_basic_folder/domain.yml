@@ -1,0 +1,112 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 0
+  carry_over_slots_to_new_session: true
+intents:
+- restaurant_search
+- greet
+- affirm
+- stop
+- goodbye
+- stop.
+entities:
+- cuisine
+- email
+- location
+- people
+- price
+- stop
+slots:
+  cuisine:
+    type: text
+    influence_conversation: true
+  location:
+    type: text
+    influence_conversation: true
+  check_op:
+    type: bool
+    influence_conversation: true
+  email:
+    type: text
+    influence_conversation: true
+  location_found:
+    type: categorical
+    influence_conversation: true
+    values:
+    - notfound
+    - tier3
+    - found
+    - __other__
+  price:
+    type: categorical
+    influence_conversation: true
+    values:
+    - lesser than 300
+    - between 300 to 700
+    - more than 700
+    - __other__
+responses:
+  utter_ask_cuisine:
+  - buttons:
+    - payload: Chinese
+      title: Chinese
+    - payload: Italian
+      title: Italian
+    - payload: South Indian
+      title: South Indian
+    - payload: North Indian
+      title: North Indian
+    - payload: Mexican
+      title: Mexican
+    - payload: Thai
+      title: Thai
+    text: what kind of cuisine would you like?
+  utter_ask_howcanhelp:
+  - text: how can I help you?
+  utter_ask_mail:
+  - text: To what email address should I send the restaurant details
+  - text: Share the recipient email address
+  utter_ask_location:
+  - text: In what location?
+  utter_default:
+  - text: i cannot understand
+  utter_goodbye:
+  - text: goodbye :(
+  - text: Bye-bye
+  utter_greet:
+  - text: hey there! How may i help you
+  - text: Hi, How can I help you!
+  - text: Hey, How is it going How May I help you Today
+  utter_ask_whethermail:
+  - text: Should I mail you all the details
+  utter_foodie_not_working:
+  - text: Sorry, we do not operate in this area.
+  utter_ask_price:
+  - buttons:
+    - payload: lesser than 300
+      title: lesser than 300
+    - payload: between 300 to 700
+      title: between 300 to 700
+    - payload: more than 700
+      title: more than 700
+    text: What is the average budget for two people?
+  utter_final_bye:
+  - text: Enjoy your food!
+  utter_location_notfound:
+  - text: Sorry, location not found. Please specify the location again
+actions:
+- action_check_location
+- action_search_restaurants
+- email_restaurant_details
+- utter_ask_cuisine
+- utter_ask_howcanhelp
+- utter_ask_location
+- utter_ask_mail
+- utter_ask_price
+- utter_ask_whethermail
+- utter_default
+- utter_final_bye
+- utter_foodie_not_working
+- utter_goodbye
+- utter_greet
+- utter_location_notfound
